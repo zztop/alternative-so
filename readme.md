@@ -10,7 +10,7 @@
 
 3. Install Pipenv
 
-   Application uses Pipenv for package management. To install pip run the folowing command.  
+   Application uses Pipenv for package management. To install pipenv run the folowing command.  
 
    ```bash
    pip install pipenv --user
