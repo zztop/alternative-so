@@ -1,6 +1,7 @@
 # Alternative SO
 
 ## Implementation of Alternative Stackoverflow using MetaPy library
+#### This implementation is part of Course CS-410 Text Information Systems, for MCS-DS (Fall 2017), University of Illinois Urbana Champaigne 
 
 ## Setup
 1. Install Python3.6. Python 3.6 can be downloaded from [here](https://www.python.org/downloads/)
