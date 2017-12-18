@@ -1,0 +1,2 @@
+type = "line-corpus"
+metadata = [{name = "index", type="int"},{name="score",type ="int"}]

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Alternative Stack Overflow</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+
+
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>
+            Alternative Java SO
+        </h1>
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Question</label>
+                <input type='search' name="searchtext" id="search-text" placeholder="Enter Question" required />
+                <small id="emailHelp" class="form-text text-muted">Questions should be Java related.</small>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="searchtype" id="relevance" value="r" checked> Search by Relevance
+                </label>
+            </div>
+            <div class="form-check ">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="searchtype" id="score" value="s"> Search by Answer Score
+                </label>
+            </div>
+            <button id='search' type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+    <script>
+        const button = document.getElementById('search');
+        button.onclick = function (e) {
+            e.preventDefault();
+            let searchValue = document.getElementById('search-text').value;
+            if (!searchValue) {
+                alert('Please enter search query')
+                return;
+            }
+
+
+            fetch('/search', {
+                method: 'POST',
+                body: `searchvalue=${document.getElementById('search-text').value}&searchtype=${document.querySelector('input[name=searchtype]:checked').value}`
+                ,
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                }
+            }).then((response) => {
+                $('.card').remove()
+                response.json().then((results) => {    
+                    let fragment = document.createDocumentFragment()                
+                    results.forEach(result => {
+                        let article = document.createElement('article'),
+                        title = document.createElement('a'),
+                        template = document.createElement('template'),
+                        score =document.createElement('span'),
+                        questionBody= document.createElement('div');
+                        article.classList.add('card')
+                        questionBody.classList.add('card-body')
+                        title.setAttribute('href','#')
+                        title.onclick = (e)=>{
+                            $(e.target).siblings(':not(.badge)').toggle()
+                        }
+                        title.classList.add('so-title')
+                        title.classList.add('card-title')
+                        score.className ='badge badge-primary badge-pill'
+                        score.innerText = result.score
+                        title.innerText = result.title
+                        questionBody.appendChild(title)
+                        questionBody.appendChild(score)
+                        article.appendChild(questionBody)
+                        template.innerHTML = '<div class="card-text">' + result.question + result.answer +"</div>"
+                        score.parentNode.insertBefore(template.content,score.nextSibling)
+                        fragment.appendChild(article)
+                    });
+                    document.querySelector('.container-fluid').appendChild(fragment)
+                    $('.card-text').hide()
+                })
+                
+               // button.parentNode.insertBefore(fragment, button.nextSibling)
+            });
+
+        }
+    </script>
+</body>
+
+</html>
