@@ -1,6 +1,7 @@
 # Alternative SO
 
 ## Implementation of Alternative Stackoverflow using MetaPy library
+#### This implementation is part of Course CS-410 Text Information Systems, for MCS-DS (Fall 2017), University of Illinois at  Urbana Champaign 
 
 ## Setup
 1. Install Python3.6. Python 3.6 can be downloaded from [here](https://www.python.org/downloads/)
@@ -9,7 +10,7 @@
 
 3. Install Pipenv
 
-   Application uses Pipenv for package management. To install pip run the folowing command.  
+   Application uses Pipenv for package management. To install pipenv run the folowing command.  
 
    ```bash
    pip install pipenv --user
@@ -17,7 +18,7 @@
 
 4. Clone the git repository and `cd` into the repository
     ```bash
-    git clone bll && cd blaah
+    git clone git@github.com:zztop/alternative-so.git && cd alternative-so
     ```
 
 5.  Install all python modules and create python virtual environment
