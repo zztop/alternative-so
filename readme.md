@@ -17,7 +17,7 @@
 
 4. Clone the git repository and `cd` into the repository
     ```bash
-    git clone bll && cd blaah
+    git clone git@github.com:zztop/alternative-so.git && cd alternative-so
     ```
 
 5.  Install all python modules and create python virtual environment
