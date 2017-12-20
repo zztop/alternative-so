@@ -8,6 +8,13 @@ class SoDatasetCreator:
 
     @staticmethod
     def create_dataset(dataset_name):
+        '''
+        Creates a Line Corpus and generates a SQLITE table so_qa in a SQLITE database names so.db.
+        Parameters
+        ----------
+        dataset_name : string
+            name of the corpus
+        '''
         from google.cloud import bigquery
         import os
         import sqlite3
@@ -40,6 +47,16 @@ class SoDatasetCreator:
 
     @staticmethod
     def fetch_search_results(searchText, searchType):
+        '''
+        Method to create an inverted index using the line corpus for SQ
+        and search the inverted index.
+        Parameters
+        ----------
+        searchText : str
+            text to search
+        searchType : str
+            Is search type 's' - sorted by Answer Score or 'r' - sorted by serach query Relevance
+        '''
         import metapy
         import sqlite3
         idx = metapy.index.make_inverted_index('config.toml')        
